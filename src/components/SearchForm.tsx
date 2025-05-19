@@ -76,7 +76,7 @@ export function SearchForm({getWeatherDataAndCity}: SearchFormProps) {
 
     return (
         <>
-            <div className="bg-gray-200 rounded-md p-4">
+            <div className="bg-gray-200 rounded-md p-4 mt-4">
                 <form onSubmit={handleFormSubmit} className="max-w-sm mx-auto space-y-3">
                     <Select onChange={(option) => {
                         setSelectedRegion(option ? option.value : null);

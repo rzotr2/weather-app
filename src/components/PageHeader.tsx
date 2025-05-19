@@ -11,8 +11,7 @@ export default function PageHeader() {
                     </a>
                     <span className="hidden sm:block">Weather App</span>
                 </div>
-                {/*todo*/}
-                <a href="https://github.com/rzotr2/task-manager" className="flex gap-3 hover:underline hover:scale-110 transition-transform duration-300">
+                <a href="https://github.com/rzotr2/weather-app" className="flex gap-3 hover:underline hover:scale-110 transition-transform duration-300">
                     <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32"
                          data-view-component="true" className="hidden sm:block">
                         <path
