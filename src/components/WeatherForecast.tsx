@@ -83,13 +83,13 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
 
     return (
         <>
-            <div className="w-[350px] md:w-[400px] mx-auto items-center">
+            <div className="w-[320px] sm:w-[400px] mx-auto items-center">
                 <Tabs.Root defaultValue="tab1">
                     <Tabs.List className="flex items-end">
                         <Tabs.Trigger
                             className={isActive ?
-                                "inline-block w-full pb-1 pt-1 px-2 text-sm rounded-t-lg text-gray-900 bg-gray-100"
-                                : "inline-block w-full pb-1 px-0.5 text-sm rounded-tl-lg text-gray-900 bg-gray-400 cursor-pointer"}
+                                "inline-block w-full py-1 px-2 text-sm rounded-t-md text-gray-900 bg-gray-100"
+                                : "inline-block w-full py-0.5 px-0.5 text-sm rounded-tl-md text-gray-900 bg-gray-400 cursor-pointer"}
                             value="tab1"
                             onClick={!isActive ? toggleClass : undefined}
                         >
@@ -98,8 +98,8 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                         </Tabs.Trigger>
                         <Tabs.Trigger
                             className={isActive ?
-                                "inline-block w-full pb-1 px-2 text-sm rounded-tr-lg text-gray-900 bg-gray-400 cursor-pointer"
-                                : "inline-block w-full pb-1 pt-1 px-2 text-sm rounded-t-lg text-gray-900 bg-gray-100"}
+                                "inline-block w-full py-0.5 px-2 text-sm rounded-tr-md text-gray-900 bg-gray-400 cursor-pointer"
+                                : "inline-block w-full py-1 px-2 text-sm rounded-t-md text-gray-900 bg-gray-100"}
                             value="tab2"
                             onClick={isActive ? toggleClass : undefined}
                         >
@@ -110,7 +110,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                         <div className="flex items-center justify-center mb-4 cursor-default">
                             <div
                                 className="w-2/5 flex flex-col items-center justify-center bg-gradient-to-br
-                                       from-[#b7d1f8] to-[#e0e5ec] p-2 rounded-bl-xl">
+                                       from-[#b7d1f8] to-[#e0e5ec] p-[10px] rounded-bl-xl">
                                 <span className="text-xl font-bold text-gray-800 pb-1">{dayOfWeek}</span>
                                 <span className="text-sm text-gray-600">{normalDate}</span>
                                 <img src={getWeatherIconSrc(weatherData.current.weather[0].main)} alt="Partly cloudy"
@@ -121,14 +121,14 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                             </div>
                             <div
                                 className="w-3/5 bg-[#e0e5ec] flex flex-col justify-between rounded-br-xl p-2">
-                                <div className="flex justify-between text-gray-700 text-sm pb-1.5">
+                                <div className="flex justify-between text-gray-700 text-sm pb-2">
                                     <div className="flex flex-col gap-1">
                                     <span>NAME</span>
                                         <span>TEMP</span>
                                         <span>HUMIDITY</span>
                                         <span>WIND</span>
                                     </div>
-                                    <div className="flex flex-col gap-1 items-end font-semibold">
+                                    <div className="flex flex-col gap-1 items-end font-semibold pb-2">
                                         <span>{selectedCity}</span>
                                         <span>{Math.round(weatherData.current.temp)}°C</span>
                                         <span>{weatherData.current.humidity}%</span>
@@ -136,23 +136,23 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                     </div>
                                 </div>
                                 <div
-                                    className="flex justify-between bg-[#e0e5ec] rounded-xl shadow-[4px_4px_12px_#b8bac0,-4px_-4px_12px_#ffffff] py-1">
+                                    className="flex justify-between bg-[#e0e5ec] rounded-xl shadow-[1px_1px_1px_#b8bac0]">
                                     {nextFourDays.map((day, index) => (
                                         <div
                                             key={index}
-                                            className="flex flex-col items-center w-[48px] hover:scale-110
+                                            className="flex flex-col items-center w-[50px] hover:scale-105
                                                        transition-all rounded-xl hover:bg-gray-800 hover:text-gray-100 group"
                                         >
                                             <img src={getWeatherIconSrc(weatherData.daily[index].weather[0].main)}
                                                  alt="Partly cloudy"
-                                                 className="h-[22px] pb-1 hidden group-hover:block"/>
+                                                 className="h-[25px] hidden group-hover:block"/>
                                             <img src={getWeatherIconSrc(weatherData.daily[index].weather[0].main, true)}
                                                  alt="Partly cloudy"
-                                                 className="h-[22px] mb-1 block group-hover:hidden"/>
+                                                 className="h-[25px] block group-hover:hidden"/>
                                             <span
                                                 className="text-xs text-gray-700 group-hover:text-gray-200">{day.day.slice(0, 3)}</span>
                                             <span
-                                                className="text-xs font-semibold text-gray-800 group-hover:text-gray-200">
+                                                className="text-xs font-semibold text-gray-800 group-hover:text-gray-200 pb-1">
                                     {Math.round(weatherData.daily[index].temp.max)}°C
                                         </span>
                                         </div>
@@ -161,28 +161,30 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                             </div>
                         </div>
                     </Tabs.Content>
-                    <Tabs.Content value="tab2" className='w-[350px] md:w-[400px] mx-auto pb-3 rounded-lg'>
-                        <div className='h-full mx-auto bg-gradient-to-b from-[#e3ecf7] to-[#cfd8df]'>
-                            <div className="py-1 px-2">
-                                <div>
+                    <Tabs.Content value="tab2" className='w-[320px] sm:w-[400px] mx-auto pb-3 rounded-lg'>
+                        <div className='h-full mx-auto bg-gradient-to-b from-[#e3ecf7] to-[#cfd8df] rounded-b-lg'>
+                            <div className="py-1 px-4">
+                                <div className="text-center py-2 text-lg">
                                     <span>{`Today, ${getNormalDate(date)} in `}
                                         <span className="font-bold">{selectedCity + ":"}</span>
                                     </span>
                                 </div>
                                 <div className="gap-5 text-sm">
                                     <div className="flex flex-col">
-                                        <span>
-                                            {`Max temp: ${Math.round(weatherData.daily[0].temp.max)}°C`}
-                                            <span
-                                                className="italic">{` (feels like ${Math.round(weatherData.daily[0].feels_like.day)}°C)`}</span>
-                                        </span>
-                                        <span>
-                                            {`Min temp: ${Math.round(weatherData.daily[0].temp.min)}°C`}
-                                            <span
-                                                className="italic">{` (feels like ${Math.round(weatherData.daily[0].feels_like.night)}°C)`}</span>
-                                        </span>
-                                        <span>
-                                            {`Pressure: ${weatherData.daily[0].pressure} hPa `}
+                                        <div className="flex justify-between">
+                                            <span className="font-medium md:font-bold">Maximal temperature</span>
+                                            <span>{`${Math.round(weatherData.daily[0].temp.max)}°C `}
+                                                <span className="italic">{`(feels like ${Math.round(weatherData.daily[0].feels_like.day)}°C)`}</span>
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-medium md:font-bold">Minimal temperature</span>
+                                            <span>{`${Math.round(weatherData.daily[0].temp.min)}°C `}
+                                                <span className="italic">{`(feels like ${Math.round(weatherData.daily[0].feels_like.night)}°C)`}</span>
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-medium md:font-bold">Pressure</span>
                                             <span
                                                 className={weatherData.daily[0].pressure > 1020
                                                     ? "text-red-500"
@@ -191,15 +193,16 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                         : "text-green-600"
                                                 }
                                             >
+                                                <span className="text-gray-800">{`${weatherData.daily[0].pressure}hPa `}</span>
                                             {weatherData.daily[0].pressure > 1020
                                                 ? "(high)"
                                                 : weatherData.daily[0].pressure < 1000
                                                     ? "(low)"
                                                     : "(normal)"}
                                             </span>
-                                        </span>
-                                        <span>
-                                          {`UV-index: ${weatherData.daily[0].uvi} `}
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-medium md:font-bold">UV-index</span>
                                             <span
                                                 className={
                                                     weatherData.daily[0].uvi >= 11
@@ -213,6 +216,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                                     : "text-blue-500"
                                                 }
                                             >
+                                                <span className="text-gray-800">{`${weatherData.daily[0].uvi} `}</span>
                                             {weatherData.daily[0].uvi >= 11
                                                 ? "(extreme)"
                                                 : weatherData.daily[0].uvi >= 8
@@ -223,29 +227,35 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                             ? "(moderate)"
                                                             : "(low)"}
                                           </span>
-                                        </span>
-                                        <span>{`Wind: ${weatherData.daily[0].wind_speed}m/s`}</span>
-                                        <span>{`Participation probability: ${weatherData.daily[0].pop * 100}%`}</span>
+                                        </div>
+                                        <div className="justify-between flex">
+                                            <span className="font-medium md:font-bold">Wind</span>
+                                            <span>{`${weatherData.daily[0].wind_speed} m/s`}</span>
+                                        </div>
+                                        <div className="justify-between flex">
+                                            <span className="font-medium md:font-bold">Participation probability</span>
+                                            <span>{`${weatherData.daily[0].pop * 100}%`}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex justify-center w-full pb-2 rounded-lg pt-2">
-                                <div className="snap-x snap-mandatory flex w-[95%] px-3
+                            <div className="flex justify-center w-full pb-3 pt-2">
+                                <div className="snap-x snap-mandatory flex w-[95%]
                                       overflow-x-auto invisible-scrollbar py-1 px-1 bg-[#e0e5ec] rounded-xl
-                                      shadow-[4px_4px_12px_#b8bac0,-4px_-4px_12px_#ffffff] space-x-2 scroll-smooth"
+                                      space-x-1 scroll-smooth"
                                 >
                                     {weatherData.hourly.map((hour, index) => (
                                         <div
                                             key={index}
-                                            className="flex flex-col items-center min-w-[56px] max-w-[56px]
-                                                  rounded-lg bg-white/70 shadow transition-all duration-200
-                                                  hover:scale-110 hover:bg-gray-800 hover:text-gray-100
+                                            className="flex flex-col items-center min-w-[50px]
+                                                  rounded-lg bg-white/70 transition-all duration-200
+                                                  hover:scale-105 hover:bg-gray-800 hover:text-gray-100
                                                   group cursor-pointer snap-center py-1"
                                         >
                                             <img
                                                 src={getWeatherIconSrc(hour.weather[0].main)}
                                                 alt="Weather icon"
-                                                className="h-[22px] pb-1 hidden group-hover:block"
+                                                className="h-[26px] pb-1 hidden group-hover:block"
                                             />
                                             <img
                                                 src={getWeatherIconSrc(hour.weather[0].main, true)}

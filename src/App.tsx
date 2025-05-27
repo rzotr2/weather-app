@@ -16,15 +16,15 @@ function App() {
     return (
       <>
           <PageHeader />
-          <div className="bg-gradient-to-b from-[#cfd8df] to-[#b5c6d6] min-h-screen">
+          <div className="bg-gradient-to-b from-[#cfd8df] to-[#b5c6d6] h-screen overflow-hidden">
               <div className={weatherData ?
                   "transition-all duration-1000 mx-auto pt-4 rounded-b-lg"
-                  : "max-h-0 overflow-hidden"}>
+                  : "max-h-0 overflow-hidden pt-4"}>
                   {weatherData && selectedCity && (
                       <WeatherForecast selectedCity={selectedCity} weatherData={weatherData} />
                   )}
               </div>
-              <div className="mx-auto w-[350px] md:w-[300px] text-sm">
+              <div className="mx-auto w-[300px] sm:w-[350px] md:w-[350px] text-sm">
                   <SearchForm getWeatherDataAndCity={getWeatherDataAndCity} />
               </div>
           </div>
