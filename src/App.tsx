@@ -33,7 +33,7 @@ function App() {
           <PageHeader />
           <div className="bg-gradient-to-b from-[#cfd8df] to-[#b5c6d6] h-[calc(100vh-56px)] overflow-hidden">
               <div className="flex justify-end p-3">
-                  <Select isSearchable={false} className="w-[150px] text-center" defaultValue={languageOptions[0]} onChange={(option) => {
+                  <Select isSearchable={false} className="w-[140px] text-center text-sm" defaultValue={languageOptions[0]} onChange={(option) => {
                       changeLanguage(option!.value)
                   }} options={languageOptions} />
               </div>

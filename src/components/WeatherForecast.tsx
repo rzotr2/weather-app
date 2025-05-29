@@ -105,7 +105,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
 
     return (
         <>
-            <div className="w-[310px] sm:w-[400px] mx-auto items-center">
+            <div className="w-[310px] sm:w-[400px] mx-auto items-center mb-4">
                 <Tabs.Root defaultValue="tab1">
                     <Tabs.List className="flex items-end">
                         <Tabs.Trigger
@@ -129,21 +129,21 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                         </Tabs.Trigger>
                     </Tabs.List>
                     <Tabs.Content value="tab1">
-                        <div className="flex items-center justify-center mb-4 cursor-default">
+                        <div className="flex items-center justify-center cursor-default">
                             <div
                                 className="w-2/5 flex flex-col items-center justify-center bg-gradient-to-br
-                                       from-[#b7d1f8] to-[#e0e5ec] p-[10px] rounded-bl-xl">
-                                <span className="text-xl font-bold text-gray-800 pb-1">{dayOfWeek}</span>
+                                       from-[#b7d1f8] to-[#e0e5ec] rounded-bl-xl py-3">
+                                <span className="text-xl font-bold text-gray-800">{dayOfWeek}</span>
                                 <span className="text-sm text-gray-600">{normalDate}</span>
                                 <img src={getWeatherIconSrc(weatherData.current.weather[0].main)} alt="Partly cloudy"
-                                     className="h-[60px] pb-2"/>
+                                     className="h-[60px]"/>
                                 <span
                                     className="text-2xl font-semibold text-gray-800">{Math.round(weatherData.current.temp)}°C</span>
-                                <span className="text-sm text-gray-700 capitalize">{weatherData.current.weather[0].description}</span>
+                                <span className="text-sm text-gray-700 capitalize max-w-11/12 truncate">{weatherData.current.weather[0].description}</span>
                             </div>
                             <div
-                                className="w-3/5 bg-[#e0e5ec] flex flex-col justify-between rounded-br-xl p-2">
-                                <div className="flex justify-between text-gray-700 text-sm pb-2">
+                                className="w-3/5 bg-[#e0e5ec] flex flex-col justify-between rounded-br-xl py-3 px-2">
+                                <div className="flex justify-between text-gray-700 text-sm">
                                     <div className="flex flex-col gap-1">
                                     <span>{t("tabOneName")}</span>
                                         <span>{t("tabOneTemperature")}</span>
