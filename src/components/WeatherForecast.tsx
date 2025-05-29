@@ -13,7 +13,7 @@ import rain from "../assets/icons/rain.svg";
 import rainDarkIcon from "../assets/icons/rainDarkIcon.svg";
 import thunderstorm from "../assets/icons/thunderstorm.svg";
 import thunderstormDarkIcon from "../assets/icons/thunderstormDarkIcon.svg";
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 type WeatherForecastProps = {
     weatherData: WeatherResponse;
@@ -73,6 +73,27 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                 return darkIcon ? thunderstormDarkIcon : thunderstorm;
             } case ("Rain"): {
                 return darkIcon ? rainDarkIcon : rain;
+            }
+        }
+    }
+
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [activeDate, setActiveDate] = useState(
+        new Date(weatherData.hourly[0].dt * 1000).toLocaleDateString("uk-UA")
+    );
+
+    // Функція для визначення дати першої видимої картки
+    function handleScroll(): void {
+        if (!scrollRef.current) return;
+        const children = Array.from(scrollRef.current.children) as HTMLDivElement[];
+        for (const child of children) {
+            const rect = child.getBoundingClientRect();
+            const parentRect = scrollRef.current.getBoundingClientRect();
+            if (rect.right > parentRect.left + 10) {
+                const index = children.indexOf(child);
+                const dateStr = new Date(weatherData.hourly[index].dt * 1000).toLocaleDateString("uk-UA");
+                setActiveDate(dateStr);
+                break;
             }
         }
     }
@@ -163,7 +184,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                     </Tabs.Content>
                     <Tabs.Content value="tab2" className='w-[320px] sm:w-[400px] mx-auto pb-3 rounded-lg'>
                         <div className='h-full mx-auto bg-gradient-to-b from-[#e3ecf7] to-[#cfd8df] rounded-b-lg'>
-                            <div className="py-1 px-4">
+                            <div className="pt-1 px-4">
                                 <div className="text-center py-2 text-lg">
                                     <span>{`Today, ${getNormalDate(date)} in `}
                                         <span className="font-bold">{selectedCity + ":"}</span>
@@ -239,38 +260,67 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex justify-center w-full pb-3 pt-2">
-                                <div className="snap-x snap-mandatory flex w-[95%]
-                                      overflow-x-auto invisible-scrollbar py-1 px-1 bg-[#e0e5ec] rounded-xl
-                                      space-x-1 scroll-smooth"
-                                >
-                                    {weatherData.hourly.map((hour, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex flex-col items-center min-w-[50px]
+                            <div className="relative w-full pb-2">
+                                <div className="sticky z-10 pt-5 px-2 font-medium text-sm">
+                                    {activeDate}
+                                </div>
+                                <div className="flex justify-center w-full">
+                                    <div className="snap-x snap-mandatory flex w-[95%]
+                                      overflow-x-auto invisible-scrollbar bg-[#e0e5ec] rounded-xl
+                                      space-x-1 scroll-smooth p-1"
+                                         ref={scrollRef}
+                                         onScroll={handleScroll}
+                                    >
+                                        {weatherData.hourly.map((hour, index) => {
+                                            const hours = new Date(hour.dt * 1000).getHours().toString().padStart(2, "0");
+
+                                            return (
+                                                <div className="flex">
+                                                    {index === 0 && (
+                                                        <>
+                                                            <div className="h-[74px] sticky">
+                                                                <span className="absolute -top-4.5 left-0.5 text-xs">14.04.2024</span>
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                    <div
+                                                        key={index}
+                                                        className="flex flex-col items-center min-w-[50px] max-w-[50px]
                                                   rounded-lg bg-white/70 transition-all duration-200
                                                   hover:scale-105 hover:bg-gray-800 hover:text-gray-100
                                                   group cursor-pointer snap-center py-1"
-                                        >
-                                            <img
-                                                src={getWeatherIconSrc(hour.weather[0].main)}
-                                                alt="Weather icon"
-                                                className="h-[26px] pb-1 hidden group-hover:block"
-                                            />
-                                            <img
-                                                src={getWeatherIconSrc(hour.weather[0].main, true)}
-                                                alt="Weather icon"
-                                                className="h-[22px] mb-1 block group-hover:hidden"
-                                            />
-                                            <span className="text-xs text-gray-700 group-hover:text-gray-200">
-                                                {`${new Date(hour.dt * 1000).getHours()}:00`}
-                                            </span>
-                                            <span
-                                                className="text-xs font-semibold text-gray-800 group-hover:text-gray-200">
-                                              {Math.round(hour.temp)}°C
-                                            </span>
-                                        </div>
-                                    ))}
+                                                    >
+                                                        <img
+                                                            src={getWeatherIconSrc(hour.weather[0].main)}
+                                                            alt="Weather icon"
+                                                            className="h-[26px] hidden group-hover:block"
+                                                        />
+                                                        <img
+                                                            src={getWeatherIconSrc(hour.weather[0].main, true)}
+                                                            alt="Weather icon"
+                                                            className="h-[22px] mb-2 block group-hover:hidden"
+                                                        />
+                                                        <span className="text-xs text-gray-700 group-hover:text-gray-200">
+                                                            {`${hours}:00`}
+                                                        </span>
+                                                            <span
+                                                                className="text-xs font-semibold text-gray-800 group-hover:text-gray-200">
+                                                            {Math.round(hour.temp)}°C
+                                                        </span>
+
+                                                    </div>
+                                                    <div>
+                                                        {hours === "23" && (
+                                                            <>
+                                                                <div className="border-r-2 border-r-slate-400/40 h-[76px] ps-1 scale-y-110">
+                                                                </div>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>

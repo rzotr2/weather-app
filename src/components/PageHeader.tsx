@@ -4,7 +4,7 @@ export default function PageHeader() {
     return (
         <>
             <div
-                className="px-4 py-2 md:px-10 md:py-5 flex justify-between bg-gray-350 shadow-md text-gray-900 text-xl font-bold items-center">
+                className="px-4 py-2 md:px-10 md:py-2 flex justify-between bg-gray-550 shadow-md text-gray-900 text-xl font-bold items-center">
                 <div className="flex items-center gap-5">
                     <a href="#">
                         <img src={logo} alt="logo"/>

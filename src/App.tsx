@@ -16,7 +16,7 @@ function App() {
     return (
       <>
           <PageHeader />
-          <div className="bg-gradient-to-b from-[#cfd8df] to-[#b5c6d6] h-screen overflow-hidden">
+          <div className="bg-gradient-to-b from-[#cfd8df] to-[#b5c6d6] h-[calc(100vh-56px)] overflow-hidden">
               <div className={weatherData ?
                   "transition-all duration-1000 mx-auto pt-4 rounded-b-lg"
                   : "max-h-0 overflow-hidden pt-4"}>
