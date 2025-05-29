@@ -14,6 +14,8 @@ import rainDarkIcon from "../assets/icons/rainDarkIcon.svg";
 import thunderstorm from "../assets/icons/thunderstorm.svg";
 import thunderstormDarkIcon from "../assets/icons/thunderstormDarkIcon.svg";
 import {useRef, useState} from "react";
+import {useTranslation} from "react-i18next";
+import i18n from "../i18n.ts";
 
 type WeatherForecastProps = {
     weatherData: WeatherResponse;
@@ -23,7 +25,7 @@ type WeatherForecastProps = {
 export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProps) {
     const [isActive, setIsActive] = useState<boolean>(true);
     const date = new Date();
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const { t } = useTranslation();
 
     const getNormalDate = (date: Date) => {
         const dd = date.getDate();
@@ -41,7 +43,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
             const nextDate = new Date(today);
             nextDate.setDate(today.getDate() + i);
 
-            const dayName = weekday[nextDate.getDay()];
+            const dayName = i18n.language === "uk" ? t(`daysOfWeekShort.${nextDate.getDay()}`) : t(`daysOfWeek.${nextDate.getDay()}`);
             const dd = nextDate.getDate();
             const mm = nextDate.getMonth() + 1 >= 10 ? nextDate.getMonth() + 1 : "0" + (nextDate.getMonth() + 1);
             const yyyy = nextDate.getFullYear();
@@ -54,7 +56,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
 
     const nextFourDays = getNextDays(4);
 
-    const dayOfWeek = weekday[date.getDay()];
+    const dayOfWeek = t(`daysOfWeek.${date.getDay()}`);
     const normalDate = getNormalDate(date);
 
     const getWeatherIconSrc = (weatherName: string, darkIcon?: boolean) => {
@@ -82,7 +84,6 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
         new Date(weatherData.hourly[0].dt * 1000).toLocaleDateString("uk-UA")
     );
 
-    // Функція для визначення дати першої видимої картки
     function handleScroll(): void {
         if (!scrollRef.current) return;
         const children = Array.from(scrollRef.current.children) as HTMLDivElement[];
@@ -104,7 +105,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
 
     return (
         <>
-            <div className="w-[320px] sm:w-[400px] mx-auto items-center">
+            <div className="w-[310px] sm:w-[400px] mx-auto items-center">
                 <Tabs.Root defaultValue="tab1">
                     <Tabs.List className="flex items-end">
                         <Tabs.Trigger
@@ -115,7 +116,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                             onClick={!isActive ? toggleClass : undefined}
                         >
 
-                            Weather overview
+                            {t("tabOneTitle")}
                         </Tabs.Trigger>
                         <Tabs.Trigger
                             className={isActive ?
@@ -124,7 +125,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                             value="tab2"
                             onClick={isActive ? toggleClass : undefined}
                         >
-                            Detailed preview
+                            {t("tabTwoTitle")}
                         </Tabs.Trigger>
                     </Tabs.List>
                     <Tabs.Content value="tab1">
@@ -138,16 +139,16 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                      className="h-[60px] pb-2"/>
                                 <span
                                     className="text-2xl font-semibold text-gray-800">{Math.round(weatherData.current.temp)}°C</span>
-                                <span className="text-sm text-gray-700">{weatherData.current.weather[0].main}</span>
+                                <span className="text-sm text-gray-700 capitalize">{weatherData.current.weather[0].description}</span>
                             </div>
                             <div
                                 className="w-3/5 bg-[#e0e5ec] flex flex-col justify-between rounded-br-xl p-2">
                                 <div className="flex justify-between text-gray-700 text-sm pb-2">
                                     <div className="flex flex-col gap-1">
-                                    <span>NAME</span>
-                                        <span>TEMP</span>
-                                        <span>HUMIDITY</span>
-                                        <span>WIND</span>
+                                    <span>{t("tabOneName")}</span>
+                                        <span>{t("tabOneTemperature")}</span>
+                                        <span>{t("tabOneHumidity")}</span>
+                                        <span>{t("tabOneWind")}</span>
                                     </div>
                                     <div className="flex flex-col gap-1 items-end font-semibold pb-2">
                                         <span>{selectedCity}</span>
@@ -171,7 +172,9 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                  alt="Partly cloudy"
                                                  className="h-[25px] block group-hover:hidden"/>
                                             <span
-                                                className="text-xs text-gray-700 group-hover:text-gray-200">{day.day.slice(0, 3)}</span>
+                                                className="text-xs text-gray-700 group-hover:text-gray-200">{
+                                                i18n.language === "uk" ? day.day : day.day.slice(0, 3)}
+                                            </span>
                                             <span
                                                 className="text-xs font-semibold text-gray-800 group-hover:text-gray-200 pb-1">
                                     {Math.round(weatherData.daily[index].temp.max)}°C
@@ -182,30 +185,30 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                             </div>
                         </div>
                     </Tabs.Content>
-                    <Tabs.Content value="tab2" className='w-[320px] sm:w-[400px] mx-auto pb-3 rounded-lg'>
+                    <Tabs.Content value="tab2" className='w-[310px] sm:w-[400px] mx-auto pb-3 rounded-lg'>
                         <div className='h-full mx-auto bg-gradient-to-b from-[#e3ecf7] to-[#cfd8df] rounded-b-lg'>
                             <div className="pt-1 px-4">
                                 <div className="text-center py-2 text-lg">
-                                    <span>{`Today, ${getNormalDate(date)} in `}
+                                    <span>{t("tabTwoSubtitle.0") + getNormalDate(date) + t("tabTwoSubtitle.1")}
                                         <span className="font-bold">{selectedCity + ":"}</span>
                                     </span>
                                 </div>
                                 <div className="gap-5 text-sm">
                                     <div className="flex flex-col">
                                         <div className="flex justify-between">
-                                            <span className="font-medium md:font-bold">Maximal temperature</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoMaxTemp")}</span>
                                             <span>{`${Math.round(weatherData.daily[0].temp.max)}°C `}
-                                                <span className="italic">{`(feels like ${Math.round(weatherData.daily[0].feels_like.day)}°C)`}</span>
+                                                <span className="italic">{`${t("tabTwoFeelsLike")} ${Math.round(weatherData.daily[0].feels_like.day)}°C)`}</span>
                                             </span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="font-medium md:font-bold">Minimal temperature</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoMinTemp")}</span>
                                             <span>{`${Math.round(weatherData.daily[0].temp.min)}°C `}
-                                                <span className="italic">{`(feels like ${Math.round(weatherData.daily[0].feels_like.night)}°C)`}</span>
+                                                <span className="italic">{`${t("tabTwoFeelsLike")} ${Math.round(weatherData.daily[0].feels_like.night)}°C)`}</span>
                                             </span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="font-medium md:font-bold">Pressure</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoPressure")}</span>
                                             <span
                                                 className={weatherData.daily[0].pressure > 1020
                                                     ? "text-red-500"
@@ -214,16 +217,16 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                         : "text-green-600"
                                                 }
                                             >
-                                                <span className="text-gray-800">{`${weatherData.daily[0].pressure}hPa `}</span>
+                                                <span className="text-gray-800">{`${weatherData.daily[0].pressure} ${t("tabTwoHpa")} `}</span>
                                             {weatherData.daily[0].pressure > 1020
-                                                ? "(high)"
+                                                ? `${t("tabTwoRating.high")}`
                                                 : weatherData.daily[0].pressure < 1000
-                                                    ? "(low)"
-                                                    : "(normal)"}
+                                                    ? `${t("tabTwoRating.moderate")}`
+                                                    : `${t("tabTwoRating.normal")}`}
                                             </span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="font-medium md:font-bold">UV-index</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoUV")}</span>
                                             <span
                                                 className={
                                                     weatherData.daily[0].uvi >= 11
@@ -238,23 +241,23 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                 }
                                             >
                                                 <span className="text-gray-800">{`${weatherData.daily[0].uvi} `}</span>
-                                            {weatherData.daily[0].uvi >= 11
-                                                ? "(extreme)"
-                                                : weatherData.daily[0].uvi >= 8
-                                                    ? "(very high)"
-                                                    : weatherData.daily[0].uvi >= 6
-                                                        ? "(high)"
-                                                        : weatherData.daily[0].uvi >= 3
-                                                            ? "(moderate)"
-                                                            : "(low)"}
-                                          </span>
+                                                    {weatherData.daily[0].uvi >= 11
+                                                        ? `${t("tabTwoRating.extreme")}`
+                                                        : weatherData.daily[0].uvi >= 8
+                                                            ? `${t("tabTwoRating.veryHigh")}`
+                                                            : weatherData.daily[0].uvi >= 6
+                                                                ? `${t("tabTwoRating.high")}`
+                                                                : weatherData.daily[0].uvi >= 3
+                                                                    ? `${t("tabTwoRating.moderate")}`
+                                                                    : `${t("tabTwoRating.normal")}`}
+                                            </span>
                                         </div>
                                         <div className="justify-between flex">
-                                            <span className="font-medium md:font-bold">Wind</span>
-                                            <span>{`${weatherData.daily[0].wind_speed} m/s`}</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoWind")}</span>
+                                            <span>{`${weatherData.daily[0].wind_speed} ${t("tabTwoWindSpeed")}`}</span>
                                         </div>
                                         <div className="justify-between flex">
-                                            <span className="font-medium md:font-bold">Participation probability</span>
+                                            <span className="font-medium md:font-bold">{t("tabTwoParticipation")}</span>
                                             <span>{`${weatherData.daily[0].pop * 100}%`}</span>
                                         </div>
                                     </div>

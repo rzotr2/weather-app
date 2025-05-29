@@ -1,6 +1,7 @@
 import { Select } from "@radix-ui/themes";
 import { useState } from "react";
 import type {Country} from "../models/models.ts";
+import {useTranslation} from "react-i18next";
 
 type CountriesSelectMenuProps = {
     countriesList: Country[];
@@ -10,11 +11,12 @@ type CountriesSelectMenuProps = {
 export function CountriesSelectMenu({countriesList, getSelectedCountry}: CountriesSelectMenuProps) {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [selectedCountryEmoji, setSelectedCountryEmoji] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     return (
         <>
             <div>
-                <Select.Root defaultValue="apple"
+                <Select.Root defaultValue="none"
                              onValueChange={(value) => {
                                  setSelectedCountry(value);
                                  getSelectedCountry(value);
@@ -30,7 +32,7 @@ export function CountriesSelectMenu({countriesList, getSelectedCountry}: Countri
                                     <span className="me-2 scale-125">{selectedCountryEmoji}</span>
                                     <span className="">{selectedCountry}</span>
                                 </span>
-                        ) : <span>Select a country...</span>}
+                        ) : <span>{t("searchCountryPlaceholder")}</span>}
                     </Select.Trigger>
                     <Select.Content position="popper" className="max-h-[200px] md:max-h-full overflow-y-auto">
                         {countriesList && countriesList.length > 0 ? (

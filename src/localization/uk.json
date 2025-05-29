@@ -1,0 +1,48 @@
+{
+  "tabOneTitle": "Огляд погоди",
+  "tabTwoTitle": "Детальний огляд",
+  "daysOfWeek": [
+    "Неділя",
+    "Понеділок",
+    "Вівторок",
+    "Середа",
+    "Четвер",
+    "Пʼятниця",
+    "Субота"
+  ],
+  "daysOfWeekShort": [
+    "Нд",
+    "Пн",
+    "Вт",
+    "Ср",
+    "Чт",
+    "Пт",
+    "Сб"
+  ],
+  "tabOneName": "НАЗВА",
+  "tabOneTemperature": "ТЕМПЕРАТУРА",
+  "tabOneHumidity": "ВОЛОГІСТЬ",
+  "tabOneWind": "ВІТЕР",
+  "tabTwoSubtitle": [
+    "Сьогодні, ", " у "
+  ],
+  "tabTwoMaxTemp": "Макс. t°",
+  "tabTwoMinTemp": "Мін. t°",
+  "tabTwoPressure": "Тиск",
+  "tabTwoUV": "УФ-індекс",
+  "tabTwoWind": "Вітер",
+  "tabTwoParticipation": "Ймовірність опадів",
+  "tabTwoFeelsLike": "(відчувається як",
+  "tabTwoHpa": "гПа",
+  "tabTwoWindSpeed": "м/с",
+  "tabTwoRating": {
+    "normal": "(нормальний)",
+    "moderate": "(помірний)",
+    "high": "(високий)",
+    "veryHigh": "(дуже високий)",
+    "extreme": "(екстремальний)"
+  },
+  "searchRegionPlaceholder": "Оберіть регіон...",
+  "searchCountryPlaceholder": "Оберіть країну...",
+  "searchCityPlaceholder": "Оберіть або введіть назву міста..."
+}

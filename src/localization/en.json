@@ -1,0 +1,39 @@
+{
+  "tabOneTitle": "Weather overview",
+  "tabTwoTitle": "Detailed preview",
+  "daysOfWeek": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ],
+  "tabOneName": "NAME",
+  "tabOneTemperature": "TEMP",
+  "tabOneHumidity": "HUMIDITY",
+  "tabOneWind": "WIND",
+  "tabTwoSubtitle": [
+    "Today, ", " in "
+  ],
+  "tabTwoMaxTemp": "Max. t°",
+  "tabTwoMinTemp": "Min. t°",
+  "tabTwoPressure": "Pressure",
+  "tabTwoUV": "UV-Index",
+  "tabTwoWind": "Wind",
+  "tabTwoParticipation": "Participation probability",
+  "tabTwoFeelsLike": "(feels like",
+  "tabTwoHpa": "hPa",
+  "tabTwoWindSpeed": "m/s",
+  "tabTwoRating": {
+    "normal": "(normal)",
+    "moderate": "(moderate)",
+    "high": "(high)",
+    "veryHigh": "(very high)",
+    "extreme": "(extreme)"
+  },
+  "searchRegionPlaceholder": "Select a region...",
+  "searchCountryPlaceholder": "Select a country...",
+  "searchCityPlaceholder": "Select or type name of a city..."
+}

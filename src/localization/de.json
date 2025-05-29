@@ -1,0 +1,39 @@
+{
+  "tabOneTitle": "Wetterübersicht",
+  "tabTwoTitle": "Detaillierte Vorschau",
+  "daysOfWeek": [
+    "Sonntag",
+    "Montag",
+    "Dienstag",
+    "Mittwoch",
+    "Donnerstag",
+    "Freitag",
+    "Samstag"
+  ],
+  "tabOneName": "NAME",
+  "tabOneTemperature": "TEMPERATUR",
+  "tabOneHumidity": "FEUCHTE",
+  "tabOneWind": "WIND",
+  "tabTwoSubtitle": [
+    "Heute, ", " in "
+  ],
+  "tabTwoMaxTemp": "Max. t°",
+  "tabTwoMinTemp": "Min. t°",
+  "tabTwoPressure": "Luftdruck",
+  "tabTwoUV": "UV-Index",
+  "tabTwoWind": "Wind",
+  "tabTwoParticipation": "Niederschlagswahrscheinlichkeit",
+  "tabTwoFeelsLike": "(gefühlt wie",
+  "tabTwoHpa": "hPa",
+  "tabTwoWindSpeed": "m/s",
+  "tabTwoRating": {
+    "normal": "(normal)",
+    "moderate": "(mäßig)",
+    "high": "(hoch)",
+    "veryHigh": "(sehr hoch)",
+    "extreme": "(extrem)"
+  },
+  "searchRegionPlaceholder": "Region auswählen...",
+  "searchCountryPlaceholder": "Land auswählen...",
+  "searchCityPlaceholder": "Stadt auswählen oder eingeben..."
+}

@@ -1,9 +1,10 @@
 import { CountriesSelectMenu } from "./CountriesSelectMenu.tsx";
 import { useEffect, useState } from "react";
 import Select from 'react-select'
-import {getCoordinates, getWeatherByCoordinates} from "../services/service-weather.ts";
+import { getCoordinates, getWeatherByCoordinates } from "../services/service-weather.ts";
 import { getCountriesByRegion } from "../services/service-country.ts";
 import type { Country, WeatherResponse } from "../models/models.ts";
+import {useTranslation} from "react-i18next";
 
 type SearchFormProps = {
     getWeatherDataAndCity: (weatherData: WeatherResponse, city: string) => void;
@@ -24,6 +25,8 @@ export function SearchForm({getWeatherDataAndCity}: SearchFormProps) {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [selectedCity, setSelectedCity] = useState<string | null>(null);
     const [citiesOptions, setCitiesOptions] = useState<{ value: string; label: string }[]>([]);
+    const { i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         async function fetchCountries() {
@@ -67,8 +70,9 @@ export function SearchForm({getWeatherDataAndCity}: SearchFormProps) {
             const coordinates = await getCoordinates(selectedCity, selectedCountry);
             const lon: string = (coordinates.data[0].lon);
             const lat: string = (coordinates.data[0].lat);
+            const language = i18n.language;
 
-            const weatherData = await getWeatherByCoordinates(lon, lat);
+            const weatherData = await getWeatherByCoordinates(lon, lat, language);
             getWeatherDataAndCity(weatherData.data, selectedCity);
         }
 
@@ -80,12 +84,12 @@ export function SearchForm({getWeatherDataAndCity}: SearchFormProps) {
                 <form onSubmit={handleFormSubmit} className="max-w-sm mx-auto space-y-3">
                     <Select onChange={(option) => {
                         setSelectedRegion(option ? option.value : null);
-                    }} options={regionOptions} placeholder="Select or type name of a city..." />
+                    }} options={regionOptions} placeholder={t("searchRegionPlaceholder")} isSearchable={false} />
                     <CountriesSelectMenu getSelectedCountry={getSelectedCountry} countriesList={countriesList} />
                     <Select onChange={(option) => {
                         setSelectedCity(option ? option.value : null);
 
-                    }} options={citiesOptions} placeholder="Select or type name of a city..." />
+                    }} options={citiesOptions} placeholder={t("searchCityPlaceholder")} />
                     <button type="submit"
                             className="py-2.5 px-5 me-2 mt-1 text-sm font-medium text-gray-500 focus:outline-none
                             bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 cursor-pointer

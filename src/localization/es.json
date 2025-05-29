@@ -1,0 +1,39 @@
+{
+  "tabOneTitle": "Resumen del clima",
+  "tabTwoTitle": "Vista detallada",
+  "daysOfWeek": [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado"
+  ],
+  "tabOneName": "NOMBRE",
+  "tabOneTemperature": "TEMPERATURA",
+  "tabOneHumidity": "HUMEDAD",
+  "tabOneWind": "VIENTO",
+  "tabTwoSubtitle": [
+    "Hoy, ", " en "
+  ],
+  "tabTwoMaxTemp": "Máx. t°",
+  "tabTwoMinTemp": "Mín. t°",
+  "tabTwoPressure": "Presión",
+  "tabTwoUV": "Índice UV",
+  "tabTwoWind": "Viento",
+  "tabTwoParticipation": "Probabilidad de precipitación",
+  "tabTwoFeelsLike": "(sensación térmica",
+  "tabTwoHpa": "hPa",
+  "tabTwoWindSpeed": "m/s",
+  "tabTwoRating": {
+    "normal": "(normal)",
+    "moderate": "(moderado)",
+    "high": "(alto)",
+    "veryHigh": "(muy alto)",
+    "extreme": "(extremo)"
+  },
+  "searchRegionPlaceholder": "Selecciona una región...",
+  "searchCountryPlaceholder": "Selecciona un país...",
+  "searchCityPlaceholder": "Selecciona o escribe el nombre de una ciudad..."
+}
