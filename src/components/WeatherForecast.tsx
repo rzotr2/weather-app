@@ -261,7 +261,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                 </div>
                             </div>
                             <div className="relative w-full pb-2">
-                                <div className="sticky z-10 pt-5 px-2 font-medium text-sm">
+                                <div className="sticky z-10 pt-3 px-3.5 font-medium text-sm">
                                     {activeDate}
                                 </div>
                                 <div className="flex justify-center w-full">
@@ -276,29 +276,22 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
 
                                             return (
                                                 <div className="flex">
-                                                    {index === 0 && (
-                                                        <>
-                                                            <div className="h-[74px] sticky">
-                                                                <span className="absolute -top-4.5 left-0.5 text-xs">14.04.2024</span>
-                                                            </div>
-                                                        </>
-                                                    )}
                                                     <div
                                                         key={index}
                                                         className="flex flex-col items-center min-w-[50px] max-w-[50px]
-                                                  rounded-lg bg-white/70 transition-all duration-200
-                                                  hover:scale-105 hover:bg-gray-800 hover:text-gray-100
-                                                  group cursor-pointer snap-center py-1"
+                                                          rounded-lg bg-white/70 transition-all duration-200
+                                                          hover:scale-105 hover:bg-gray-800 hover:text-gray-100
+                                                          group cursor-pointer snap-center py-1"
                                                     >
                                                         <img
                                                             src={getWeatherIconSrc(hour.weather[0].main)}
                                                             alt="Weather icon"
-                                                            className="h-[26px] hidden group-hover:block"
+                                                            className="h-[26px] mb-1 hidden group-hover:block"
                                                         />
                                                         <img
                                                             src={getWeatherIconSrc(hour.weather[0].main, true)}
                                                             alt="Weather icon"
-                                                            className="h-[22px] mb-2 block group-hover:hidden"
+                                                            className="h-[26px] mb-1 block group-hover:hidden"
                                                         />
                                                         <span className="text-xs text-gray-700 group-hover:text-gray-200">
                                                             {`${hours}:00`}
@@ -312,8 +305,7 @@ export function WeatherForecast({weatherData, selectedCity}: WeatherForecastProp
                                                     <div>
                                                         {hours === "23" && (
                                                             <>
-                                                                <div className="border-r-2 border-r-slate-400/40 h-[76px] ps-1 scale-y-110">
-                                                                </div>
+                                                                <div className="border-r-2 border-r-slate-400/70 h-[76px] ps-1 scale-y-110"></div>
                                                             </>
                                                         )}
                                                     </div>
