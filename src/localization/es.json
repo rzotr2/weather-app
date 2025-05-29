@@ -35,5 +35,6 @@
   },
   "searchRegionPlaceholder": "Selecciona una región...",
   "searchCountryPlaceholder": "Selecciona un país...",
-  "searchCityPlaceholder": "Selecciona o escribe el nombre de una ciudad..."
+  "searchCityPlaceholder": "Selecciona o escribe el nombre de una ciudad...",
+  "submitButton": "Buscar por ciudad"
 }

@@ -44,5 +44,6 @@
   },
   "searchRegionPlaceholder": "Оберіть регіон...",
   "searchCountryPlaceholder": "Оберіть країну...",
-  "searchCityPlaceholder": "Оберіть або введіть назву міста..."
+  "searchCityPlaceholder": "Оберіть або введіть назву міста...",
+  "submitButton": "Пошук за містом"
 }
