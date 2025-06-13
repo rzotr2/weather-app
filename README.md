@@ -3,7 +3,7 @@
 A modern, responsive weather application built with React, TypeScript, and TailwindCSS.  
 This project demonstrates my skills in frontend development, API integration, and internationalization.
 
-🚀 DEMO: [link]([https://playful-horse-81ce85.netlify.app/](https://rzotr2-weather-app.xyz/))
+🚀 DEMO: [link]((https://rzotr2-weather-app.xyz/))
 
 ---
 
